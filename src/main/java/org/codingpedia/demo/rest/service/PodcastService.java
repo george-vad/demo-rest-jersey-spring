@@ -40,20 +40,6 @@ public interface PodcastService {
 	 * @throws AppException 
 	 */
 	public Podcast getPodcastById(Long id) throws AppException;
-	/** 
-	 * Returns all podcasts from "legacy" system
-	 * @return
-	 */
-	public List<Podcast> getLegacyPodcasts();
-	
-	/**
-	 * Returns a "legacy" podcast given its id
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Podcast getLegacyPodcastById(Long id);
-	
 	
 	/*
 	 * ******************** Update related methods **********************

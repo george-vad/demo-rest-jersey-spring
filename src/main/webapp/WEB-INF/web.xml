@@ -46,16 +46,10 @@
       <url-pattern>/manifest/*</url-pattern>
     </filter-mapping>	
      
-	<resource-ref>
+	<resource-ref id="demoDS">
         <description>Database resource for rest demo web application </description>
         <res-ref-name>jdbc/restDemoDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>	
-	<resource-ref>
-        <description>Database resource for legacy system of demo rest web application </description>
-        <res-ref-name>jdbc/restDemoLegacyDB</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>	    
 </web-app>

@@ -23,13 +23,10 @@ public abstract class AbstractStatusType implements StatusType {
 	    this(status.getFamily(), status.getStatusCode(), reasonPhrase);
 	}
 	
-	@Override
 	public Family getFamily() { return family; }
 	
-	@Override
 	public String getReasonPhrase() { return reasonPhrase; }
 	
-	@Override
 	public int getStatusCode() { return statusCode; }
 
 	private final Family family;

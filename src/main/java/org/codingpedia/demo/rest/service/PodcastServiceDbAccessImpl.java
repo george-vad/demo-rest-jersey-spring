@@ -109,15 +109,6 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 		return getPodcastsFromEntities(recentPodcasts);
 	}
 
-	public List<Podcast> getLegacyPodcasts() {
-		List<PodcastEntity> legacyPodcasts = podcastDao.getLegacyPodcasts();
-		
-		return getPodcastsFromEntities(legacyPodcasts);
-	}
-
-	public Podcast getLegacyPodcastById(Long id) {
-		return new Podcast(podcastDao.getLegacyPodcastById(id));
-	}
 	
 	
 	/********************* UPDATE-related methods implementation ***********************/	
@@ -210,8 +201,7 @@ public class PodcastServiceDbAccessImpl implements PodcastService {
 		
 	}
 
-	@Override
-	public void generateCustomReasonPhraseException() throws CustomReasonPhraseException {		
+	public void generateCustomReasonPhraseException() throws CustomReasonPhraseException {
 		throw new CustomReasonPhraseException(4000, "message attached to the Custom Reason Phrase Exception");		
 	}
 

@@ -19,9 +19,6 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-    <bean id="transactionManagerLegacy" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactoryLegacy" />
-    </bean>    
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="classpath:config/persistence-demo.xml" />
         <property name="persistenceUnitName" value="demoRestPersistence" />        
@@ -34,32 +31,15 @@
             </bean>
         </property>
     </bean>     
-    <bean id="entityManagerFactoryLegacy" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceXmlLocation" value="classpath:config/persistence-demo.xml" />
-        <property name="persistenceUnitName" value="demoRestPersistenceLegacy" />
-        <property name="dataSource" ref="restDemoLegacyDS" />
-        <property name="packagesToScan" value="org.codingpedia.demo.*" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="true" />
-                <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
-            </bean>
-        </property>
-    </bean>        
-    	
+
 	<bean id="podcastDao" class="org.codingpedia.demo.rest.dao.PodcastDaoJPA2Impl"/>	
     <bean id="podcastService" class="org.codingpedia.demo.rest.service.PodcastServiceDbAccessImpl" />	
     <bean id="podcastsResource" class="org.codingpedia.demo.rest.resource.podcast.PodcastsResource" />
-    <bean id="podcastLegacyResource" class="org.codingpedia.demo.rest.resource.podcast.PodcastLegacyResource" />
-    
+
     <bean id="versionService" class="org.codingpedia.demo.rest.resource.manifest.ManifestService" />
     
 	<bean id="restDemoDS" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
 	    <property name="jndiName" value="java:comp/env/jdbc/restDemoDB" />
 	    <property name="resourceRef" value="true" />        
 	</bean>
-	<bean id="restDemoLegacyDS" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
-	    <property name="jndiName" value="java:comp/env/jdbc/restDemoLegacyDB" />
-	    <property name="resourceRef" value="true" />        
-	</bean>	
 </beans>

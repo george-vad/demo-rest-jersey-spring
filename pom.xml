@@ -287,7 +287,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.maven.plugin.version}</version>
 				<configuration>
-					<jettyXml>${project.basedir}/src/main/resources/config/jetty9.xml</jettyXml>
+					<jettyXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-env.xml</jettyXml>
 					<!-- ,${project.basedir}/src/main/resources/config/jetty-ssl.xml, ${project.basedir}/src/main/resources/config/jetty-https.xml -->
 					<stopKey>STOP</stopKey>
 					<stopPort>9999</stopPort>
@@ -342,7 +342,7 @@
 						<artifactId>jetty-maven-plugin</artifactId>
 						<version>${jetty.maven.plugin.version}</version>
 						<configuration>
-							<jettyConfig>${project.basedir}/src/main/resources/config/jetty9.xml</jettyConfig>
+							<jettyXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-env.xml</jettyXml>
 							<stopKey>STOP</stopKey>
 							<stopPort>9999</stopPort>
 							<stopWait>5</stopWait>
