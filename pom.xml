@@ -9,13 +9,13 @@
 	<description>Example of building REST web services with spring, jersey and jpa2/hibernate</description>
 
 	<properties>
-		<spring.version>4.1.4.RELEASE</spring.version>
-		<spring.security.version>3.2.5.RELEASE</spring.security.version>
-		<jersey.version>2.14</jersey.version>
-		<jackson.version>1.9.13</jackson.version>
-		<hibernate.version>4.2.7.Final</hibernate.version>
-		<jetty.maven.plugin.version>9.2.6.v20141205</jetty.maven.plugin.version> <!-- Adapt this to a version found on http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/ -->
-		<logback.version>1.1.1</logback.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<spring.security.version>4.0.4.RELEASE</spring.security.version>
+		<jersey.version>2.22.2</jersey.version>
+		<jackson.version>2.7.3</jackson.version>
+		<hibernate.version>5.1.0.Final</hibernate.version>
+		<jetty.maven.plugin.version>9.3.8.v20160314</jetty.maven.plugin.version> <!-- Adapt this to a version found on http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/ -->
+		<logback.version>1.1.7</logback.version>
 		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 	</properties>
 
@@ -51,6 +51,14 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-beans</artifactId>
 				</exclusion>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.ext</groupId>
+                    <artifactId>jersey-bean-validation</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.glassfish.hk2.external</groupId>
+                    <artifactId>bean-validator</artifactId>
+                </exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -131,7 +139,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.27</version>
+			<version>5.1.38</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -151,8 +159,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -176,7 +184,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.1</version>
+			<version>1.9.2</version>
 		</dependency>		
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -187,13 +195,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.10.8</version>
+			<version>1.10.19</version>
 		</dependency>		
 		<dependency>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
@@ -214,18 +222,18 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
-		</dependency>		
+		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
-		</dependency>		
+		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>	
 		
@@ -306,7 +314,7 @@
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
-						<version>5.1.27</version>
+						<version>5.1.38</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -360,7 +368,7 @@
 							<dependency>
 								<groupId>mysql</groupId>
 								<artifactId>mysql-connector-java</artifactId>
-								<version>5.1.27</version>
+								<version>5.1.38</version>
 							</dependency>
 						</dependencies>
 						<executions>
@@ -391,12 +399,18 @@
         <!-- profile to run soapui integration tests against the "local" jetty started on local machine -->
         <profile>
             <id>soapuiTestRunner-local-jetty</id>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>smartbear-sweden-plugin-repository</id>
+					<url>http://www.soapui.org/repository/maven2/</url>
+				</pluginRepository>
+			</pluginRepositories>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>com.smartbear.soapui</groupId>
                         <artifactId>soapui-maven-plugin</artifactId>
-                        <version>5.0.0</version>
+                        <version>5.2.1</version>
                         <executions>
                             <execution>
                                 <phase>test</phase>
@@ -429,12 +443,18 @@
         a continuous integration environment, you could start the integration tests after the deployment job has been finished -->
         <profile>
             <id>soapuiTestRunner-dev-tomcat</id>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>smartbear-sweden-plugin-repository</id>
+					<url>http://www.soapui.org/repository/maven2/</url>
+				</pluginRepository>
+			</pluginRepositories>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>com.smartbear.soapui</groupId>
                         <artifactId>soapui-maven-plugin</artifactId>
-                        <version>5.0.0</version>
+                        <version>5.2.1</version>
                         <executions>
                             <execution>
                                 <!--Run as part of the test phase in the Maven lifecycle-->

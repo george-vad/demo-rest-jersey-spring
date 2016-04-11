@@ -22,7 +22,6 @@ import javax.ws.rs.ext.WriterInterceptorContext;
 @Compress
 public class GZIPWriterInterceptor implements WriterInterceptor {
 	 
-    @Override
     public void aroundWriteTo(WriterInterceptorContext context)
                     throws IOException, WebApplicationException {
     	
